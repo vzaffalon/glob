@@ -1,0 +1,35 @@
+<div class="col-md-12">
+
+  <a href="<%= Routes.project_path(@conn, :index)%>" class="btn btn-default btn-sm">
+    Back
+  </a>
+
+  <h1>
+    Project: <%= @project.name %>
+  </h1>
+
+  <div class="actions">
+    <a href="<%= Routes.project_path(@conn, :edit, @user.id) %>" class="btn btn-primary">
+      Edit
+    </a>
+
+    <form action="/users/<%= @user.id %>" method="post">
+      <button type="submit" class="btn btn-danger">Delete</button>
+    </form>
+  </div>
+</div>
+
+<script>
+  $("form").on("submit", function(event) {
+    event.preventDefault();
+    $that = this;
+    $.ajax({
+      url: $that.getAttribute('action'),
+      type: "DELETE",
+      data: $('form').serialize(),
+      success: function(data) {
+        window.location = data.location;
+      }
+    });
+  });
+</script>

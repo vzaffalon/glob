@@ -1,0 +1,18 @@
+<div class="col-md-12">
+  <h3>Projects</h3>
+
+  <ul>
+    <%= for project <- @projects do %>
+      <li>
+        <a href="<%= Routes.project_path(@conn, :show, project.id) %>">
+            <div><%= project.name %> </div>
+            <div><%= project.description %> </div>
+        </a>
+      </li>
+    <% end %>
+  </ul>
+
+  <a href="<%= Routes.project_path(@conn, :new) %>" class="btn btn-primary">
+    New Project
+  </a>
+</div>

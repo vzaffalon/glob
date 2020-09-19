@@ -1,0 +1,28 @@
+<div class="col-md-12">
+  <h3>Edit: <%= @project.description %></h3>
+
+  <div class="actions">
+    <form action="/projects/<%= @project.id %>" method="post">
+      <div class="form-group">
+        <input type="text" name="project[name]" value="<%= @project.name %>" class="form-control" />
+        <input type="text" name="project[description]" value="<%= @project.description %>" class="form-control" />
+      </div>
+      <button type="submit" class="btn btn-primary">Update</button>
+    </form>
+  </div>
+</div>
+
+<script>
+  $("form").on("submit", function(event) {
+    event.preventDefault();
+    $that = this;
+    $.ajax({
+      url: $that.getAttribute('action'),
+      type: "PUT",
+      data: $('form').serialize(),
+      success: function(data) {
+        window.location = data.location;
+      }
+    });
+  });
+</script>
